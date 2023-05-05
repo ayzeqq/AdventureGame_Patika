@@ -22,16 +22,20 @@ public class Mağaza {
     }
 
     public void silahAl(Karakter karakter){
-        System.out.println("Hangisi? Tabanca(1), Kılıç(2), Tüfek(3)");
+        System.out.println("Hangisi? Tabanca(1)[25 P], Kılıç(2)[35 P], Tüfek(3)[45 P]");
+        System.out.println("Cüzdan: " + karakter.para);
         int al = input.nextInt();
-        if(al==1){
+        if(al==1 && karakter.para>=25){
             karakter.etki=karakter.hasar+2;
+            karakter.para-=25;
         }
-        else if(al==2){
+        else if(al==2 && karakter.para>=35){
             karakter.etki=karakter.hasar+3;
+            karakter.para-=35;
         }
-        else if(al==3){
+        else if(al==3 && karakter.para>=45){
             karakter.etki=karakter.hasar+7;
+            karakter.para-=45;
         }
         else{
             System.out.println("Silah satın alınmadı!");
@@ -39,25 +43,29 @@ public class Mağaza {
     }
 
     public void zirhAl(Canavar c1, Canavar c2, Canavar c3){
-        System.out.println("Hangi zırh? Hafif(1), Orta(2), Ağır(3)");
+        System.out.println("Hangi zırh? Hafif(1)[15 P], Orta(2)[25 P], Ağır(3)[40 P]");
+        System.out.println("Cüzdan: " + karakter.para);
         int al = input.nextInt();
-        if(al==1){
+        if(al==1 && karakter.para>=15){
             c1.etki=c1.hasar-1;
             c2.etki=c2.hasar-1;
             c3.etki=c3.hasar-1;
-            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki);            
+            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki);
+            karakter.para-=15;
         }
-        else if(al==2){
+        else if(al==2 && karakter.para>=25){
             c1.etki=c1.hasar-3;
             c2.etki=c2.hasar-3;
             c3.etki=c3.hasar-3;
             System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki);
+            karakter.para-=25;
         }
-        else if(al==3){
+        else if(al==3 && karakter.para>=40){
             c1.etki=0;
             c2.etki=0;
             c3.etki=c3.hasar-5;
             System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki);
+            karakter.para-=40;
         }
         else{
             System.out.println("Zırh satın alınmadı!");

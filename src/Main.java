@@ -2,9 +2,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
-        // Satın alma düzenlemesi yapılacak...
-        // Gereksiz eklenen kodları incele ve çıkar...
-        
+        // ++++ Satın alma düzenlemesi yapılacak...
+        // ++++ Gereksiz eklenen kodları incele ve çıkar...
         // ++++ Mağaza kısmı eklenecek...
         // ++++ Kazansa da "kaybetti" yazısı ilaveten çıkıyor...
         // ++++ Her turda eşya kazanmamalı, o turdaki tüm canavarlar ölünce almalı...
@@ -17,14 +16,16 @@ public class Main {
         Canavar Zombi = new Canavar (1,3,10,4, "Zombi", 3);
         Canavar Vampir = new Canavar (2,4,14,7, "Vampir", 4);
         Canavar Ayı = new Canavar (3,7,20,12, "Ayı", 7);
-        Silahlar Tabanca = new Silahlar (1,2,25);
+        
+        /*Silahlar Tabanca = new Silahlar (1,2,25);
         Silahlar Kılıç = new Silahlar (2,3,35);
         Silahlar Tüfek = new Silahlar (3,7,45);
         
         
         Zirhlar Hafif = new Zirhlar (1,1,15);
         Zirhlar Orta = new Zirhlar (2,3,25);
-        Zirhlar Ağır = new Zirhlar (3,5,40);
+        Zirhlar Ağır = new Zirhlar (3,5,40);*/
+        
         Mekan Mağara = new Mekan ("Mağara", Zombi, false);
         Mekan Orman = new Mekan ("Orman", Vampir, false);
         Mekan Nehir = new Mekan ("Nehir", Ayı, false);
@@ -52,7 +53,18 @@ public class Main {
                     continue;
                 }
                 for(int i=1;i<=sayi;i++){
-                    Savaş.savasGanimet(Gamer, i);
+                    if(Gamer.saglik>0){
+                        Savaş.savasGanimet(Gamer, i);
+                    }
+                    else{
+                        break;
+                    }
+                    if(Gamer.saglik>0) {
+                        Gamer.para+=4;
+                        System.out.println("4 para kazandınız!");
+                        System.out.println("Toplam para: " + Gamer.para);
+                        System.out.println("=========");
+                    }
                 }
                 if(Gamer.saglik>0){
                     Mağara.eşya=true;
@@ -73,7 +85,18 @@ public class Main {
                     continue;
                 }
                 for(int i=1;i<=sayi;i++){
-                    Savaş.savasGanimet(Gamer, i);
+                    if(Gamer.saglik>0){
+                        Savaş.savasGanimet(Gamer, i);
+                    }
+                    else{
+                        break;
+                    }
+                    if(Gamer.saglik>0) {
+                        Gamer.para+=7;
+                        System.out.println("7 para kazandınız!");
+                        System.out.println("Toplam para: " + Gamer.para);
+                        System.out.println("=========");
+                    }
                 }
                 if(Gamer.saglik>0){
                     Orman.eşya=true;
@@ -93,31 +116,55 @@ public class Main {
                     continue;
                 }
                 for(int i=1;i<=sayi;i++){
-                    Savaş.savasGanimet(Gamer, i);
+                    if(Gamer.saglik>0){
+                        Savaş.savasGanimet(Gamer, i);
+                    }
+                    else{
+                        break;
+                    }
+                    if(Gamer.saglik>0) {
+                        Gamer.para+=12;
+                        System.out.println("12 para kazandınız!");
+                        System.out.println("Toplam para: " + Gamer.para);
+                        System.out.println("=========");
+                    }
                 }
                 if(Gamer.saglik>0){
                     Nehir.eşya=true;
                     System.out.println("Eşya kazanıldı!");
+                    System.out.println(" ");
                 }
                 if(isKazandi(Mağara, Orman, Nehir)){
                     System.out.println("Kazandınız!");
+                    System.out.println("BİLGİLER:");
+                    System.out.println("Oyuncu sağlık durumu: " + Gamer.saglik);
+                    System.out.println("Oyuncu para durumu: " + Gamer.para);
                     break;
                 }
             }
             else if(seçMek==4){
                 Gamer.saglikTamamla();
+                System.out.println("Sağlık yenilendi!");
             }
             else if(seçMek==5){
                 System.out.println("Hangisini satın almak istersin? Silah (1) / Zırh (2)");
                 int al = input.nextInt();
                 mağaza.alisveris(Gamer, al, Zombi, Vampir, Ayı);
+                System.out.println("Kalan para: " + Gamer.para);
             }
             else {
                 System.out.println("Geçerli bir seçenek giriniz!");
             }
             
         }
-        if(Gamer.saglik<=0) System.out.println("Kaybettiniz!");
+        if(Gamer.saglik<=0) {
+            System.out.println("============");
+            System.out.println("Kaybettiniz!");
+            System.out.println("============");
+            System.out.println("BİLGİLER:");
+            System.out.println("Oyuncu sağlık durumu: " + Gamer.saglik);
+            System.out.println("Oyuncu para durumu: " + Gamer.para);
+        }
     }
 
     static boolean isKazandi(Mekan Mağara, Mekan Orman, Mekan Nehir) {
