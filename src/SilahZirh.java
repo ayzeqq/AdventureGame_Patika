@@ -1,5 +1,3 @@
-import java.lang.reflect.Constructor;
-
 public abstract class SilahZirh {
     int ID;
     int hasar;

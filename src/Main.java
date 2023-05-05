@@ -34,16 +34,12 @@ public class Main {
         
         System.out.println("Karakter seçiniz: Samuray (1), Okçu (2), Şovalye (3)");
 
-        Mağaza mağaza = new Mağaza();
-        
-        System.out.println("Karakter seçiniz: Samuray (1), Okçu (2), Şovalye (3)");
         Scanner input = new Scanner(System.in);
         int seçKar = input.nextInt();
         if(seçKar==1) Gamer=Samuray;
         if(seçKar==2) Gamer=Okçu;
         if(seçKar==3) Gamer=Şovalye;
-        //System.out.println("Gamer silahı " + Zombi.hasar);
-        System.out.println(Gamer.ID);
+
         while(Gamer.saglik>0){
             System.out.println("Gidilecek yer: Mağara 1, Orman 2, Nehir 3, Güvenli Ev 4, Mağaza 5");
             int seçMek = input.nextInt();
@@ -87,46 +83,6 @@ public class Main {
                     System.out.println("Kazandınız!");
                     break;
                 }
-            if(seçMek==1) {
-                Savaş=Mağara;
-                int sayi = Savaş.canavarSayisi();
-                System.out.println(sayi + " adet Zombi çıktı, savaşmak için (1), kaçmak için (2).");
-                int savKaç=input.nextInt();
-                if(savKaç==2) {
-                    continue;
-                }
-                for(int i=1;i<=sayi;i++){
-                    Savaş.savasGanimet(Gamer, i);
-                }
-                if(Gamer.saglik>0){
-                    Mağara.eşya=true;
-                    System.out.println("Eşya kazanıldı!");
-                }
-                
-                if(isKazandi(Mağara, Orman, Nehir)){
-                    System.out.println("Kazandınız!");
-                    break;
-                }
-            }
-            else if(seçMek==2) {
-                Savaş=Orman;
-                int sayi = Savaş.canavarSayisi();
-                System.out.println(sayi + " adet Vampir çıktı, savaşmak için (1), kaçmak için (2).");
-                int savKaç=input.nextInt();
-                if(savKaç==2) {
-                    continue;
-                }
-                for(int i=1;i<=sayi;i++){
-                    Savaş.savasGanimet(Gamer, i);
-                }
-                if(Gamer.saglik>0){
-                    Orman.eşya=true;
-                    System.out.println("Eşya kazanıldı!");
-                }
-                if(isKazandi(Mağara, Orman, Nehir)){
-                    System.out.println("Kazandınız!");
-                    break;
-                }
             }
             else if(seçMek==3) {
                 Savaş=Nehir;
@@ -162,42 +118,6 @@ public class Main {
             
         }
         if(Gamer.saglik<=0) System.out.println("Kaybettiniz!");
-                
-            else if(seçMek==3) {
-                Savaş=Nehir;
-                int sayi = Savaş.canavarSayisi();
-                System.out.println(sayi + " adet Ayı çıktı, savaşmak için (1), kaçmak için (2).");
-                int savKaç=input.nextInt();
-                if(savKaç==2) {
-                    continue;
-                }
-                for(int i=1;i<=sayi;i++){
-                    Savaş.savasGanimet(Gamer, i);
-                }
-                if(Gamer.saglik>0){
-                    Nehir.eşya=true;
-                    System.out.println("Eşya kazanıldı!");
-                }
-                if(isKazandi(Mağara, Orman, Nehir)){
-                    System.out.println("Kazandınız!");
-                    break;
-                }
-            }
-            else if(seçMek==4){
-                Gamer.saglikTamamla();
-            }
-            else if(seçMek==5){
-                System.out.println("Hangisini satın almak istersin? Silah (1) / Zırh (2)");
-                int al = input.nextInt();
-                mağaza.alisveris(Gamer, al, Zombi, Vampir, Ayı);
-            }
-            else {
-                System.out.println("Geçerli bir seçenek giriniz!");
-            }
-            
-        }
-        if(Gamer.saglik<=0) System.out.println("Kaybettiniz!");
-                
     }
 
     static boolean isKazandi(Mekan Mağara, Mekan Orman, Mekan Nehir) {
@@ -205,11 +125,5 @@ public class Main {
             return true;
         }
         return false;
-    }
-
-    public void setEtki(Canavar Zombi, Canavar Vampir, Canavar Ayı, int a){
-        Zombi.etki=a;
-        Vampir.etki=a;
-        Ayı.etki=a;
     }
 }

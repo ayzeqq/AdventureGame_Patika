@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import java.util.Scanner;
-
 public class Mağaza {
     Karakter karakter;
     Silahlar silah;
