@@ -16,6 +16,8 @@ public class Main {
         Canavar Zombi = new Canavar (1,3,10,4, "Zombi", 3);
         Canavar Vampir = new Canavar (2,4,14,7, "Vampir", 4);
         Canavar Ayı = new Canavar (3,7,20,12, "Ayı", 7);
+        Canavar Yılan = new Canavar (4, 0, 12, 0, "Yılan", 6); //hasar ve etki de randomlanacak!!
+        //System.out.println(Yılan.para + " " + Yılan.hasar);
         
         /*Silahlar Tabanca = new Silahlar (1,2,25);
         Silahlar Kılıç = new Silahlar (2,3,35);
@@ -29,6 +31,7 @@ public class Main {
         Mekan Mağara = new Mekan ("Mağara", Zombi, false);
         Mekan Orman = new Mekan ("Orman", Vampir, false);
         Mekan Nehir = new Mekan ("Nehir", Ayı, false);
+        Mekan Maden = new Mekan (name:"Maden", Yılan, false);
         Mekan Savaş = new Mekan ("Savaş", Zombi, false);
 
         Mağaza mağaza = new Mağaza();
@@ -46,6 +49,13 @@ public class Main {
             int seçMek = input.nextInt();
             if(seçMek==1) {
                 Savaş=Mağara;
+                if(Mağara.eşya){
+                    System.out.println("=========");
+                    System.out.println("Daha önce bu bölümden eşya kazanıldı.");
+                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("=========");
+                    continue;
+                }
                 int sayi = Savaş.canavarSayisi();
                 System.out.println(sayi + " adet Zombi çıktı, savaşmak için (1), kaçmak için (2).");
                 int savKaç=input.nextInt();
@@ -78,6 +88,13 @@ public class Main {
             }
             else if(seçMek==2) {
                 Savaş=Orman;
+                if(Orman.eşya){
+                    System.out.println("=========");
+                    System.out.println("Daha önce bu bölümden eşya kazanıldı.");
+                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("=========");
+                    continue;
+                }
                 int sayi = Savaş.canavarSayisi();
                 System.out.println(sayi + " adet Vampir çıktı, savaşmak için (1), kaçmak için (2).");
                 int savKaç=input.nextInt();
@@ -109,6 +126,13 @@ public class Main {
             }
             else if(seçMek==3) {
                 Savaş=Nehir;
+                if(Nehir.eşya){
+                    System.out.println("=========");
+                    System.out.println("Daha önce bu bölümden eşya kazanıldı.");
+                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("=========");
+                    continue;
+                }
                 int sayi = Savaş.canavarSayisi();
                 System.out.println(sayi + " adet Ayı çıktı, savaşmak için (1), kaçmak için (2).");
                 int savKaç=input.nextInt();
@@ -151,6 +175,48 @@ public class Main {
                 int al = input.nextInt();
                 mağaza.alisveris(Gamer, al, Zombi, Vampir, Ayı);
                 System.out.println("Kalan para: " + Gamer.para);
+            }
+            else if(seçMek==6){ // hasar ve para-eşya vs düşme ihtimalini düzenle...
+                Savaş=Maden;
+                if(Maden.eşya){
+                    System.out.println("=========");
+                    System.out.println("Daha önce bu bölümden eşya kazanıldı.");
+                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("=========");
+                    continue;
+                }
+                int sayi = Savaş.canavarSayisi();
+                System.out.println(sayi + " adet Yılan çıktı, savaşmak için (1), kaçmak için (2).");
+                int savKaç=input.nextInt();
+                if(savKaç==2) {
+                    continue;
+                }
+                for(int i=1;i<=sayi;i++){
+                    if(Gamer.saglik>0){
+                        Savaş.savasGanimet(Gamer, i);
+                    }
+                    else{
+                        break;
+                    }
+                    if(Gamer.saglik>0) {
+                        Gamer.para+=12;
+                        System.out.println("12 para kazandınız!");
+                        System.out.println("Toplam para: " + Gamer.para);
+                        System.out.println("=========");
+                    }
+                }
+                if(Gamer.saglik>0){
+                    Nehir.eşya=true;
+                    System.out.println("Eşya kazanıldı!");
+                    System.out.println(" ");
+                }
+                if(isKazandi(Mağara, Orman, Nehir)){
+                    System.out.println("Kazandınız!");
+                    System.out.println("BİLGİLER:");
+                    System.out.println("Oyuncu sağlık durumu: " + Gamer.saglik);
+                    System.out.println("Oyuncu para durumu: " + Gamer.para);
+                    break;
+                }
             }
             else {
                 System.out.println("Geçerli bir seçenek giriniz!");

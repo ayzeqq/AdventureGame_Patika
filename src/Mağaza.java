@@ -17,7 +17,7 @@ public class Mağaza {
             silahAl(karakter);
         }
         if(al==2){
-            zirhAl(c1, c2, c3);
+            zirhAl(karakter, c1, c2, c3);
         }
     }
 
@@ -42,7 +42,7 @@ public class Mağaza {
         }
     }
 
-    public void zirhAl(Canavar c1, Canavar c2, Canavar c3){
+    public void zirhAl(Karakter karakter, Canavar c1, Canavar c2, Canavar c3){
         System.out.println("Hangi zırh? Hafif(1)[15 P], Orta(2)[25 P], Ağır(3)[40 P]");
         System.out.println("Cüzdan: " + karakter.para);
         int al = input.nextInt();

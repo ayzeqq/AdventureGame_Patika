@@ -23,10 +23,32 @@ public class Mekan {
         System.out.println("---------");
         System.out.println("Oyuncu sağlığı:" + karakter.saglik + " / Canavar sağlığı:" + canavar.saglik);
         int temp=canavar.saglik;
-        while(canavar.saglik>0 && karakter.saglik>0){
-            canavar.saglik-=karakter.etki;
-            karakter.saglik-=canavar.etki;
+        Random rand = new Random();
+        int sayi = rand.nextInt(2);
+        if(sayi==0){
+            while(canavar.saglik>=0 && karakter.saglik>=0){
+                canavar.saglik-=karakter.etki;
+                if(canavar.saglik<=0 || karakter.saglik<=0) {
+                    System.out.println("Canavar sağlığı:" + canavar.saglik + " / Oyuncu sağlığı:" + karakter.saglik);
+                    break;
+                }
+                karakter.saglik-=canavar.etki;
+                System.out.println("Canavar sağlığı:" + canavar.saglik + " / Oyuncu sağlığı:" + karakter.saglik);
+
+            }
         }
+        if(sayi==1){
+            while(canavar.saglik>=0 && karakter.saglik>=0){
+                karakter.saglik-=canavar.etki;
+                if(canavar.saglik<=0 || karakter.saglik<=0) {
+                    System.out.println("Oyuncu sağlığı:" + karakter.saglik + " / Canavar sağlığı:" + canavar.saglik);
+                    break;
+                }
+                canavar.saglik-=karakter.etki;
+                System.out.println("Oyuncu sağlığı:" + karakter.saglik + " / Canavar sağlığı:" + canavar.saglik);
+            }
+        }
+        
         System.out.println("Oyuncu sağlığı:" + karakter.saglik + " / Canavar sağlığı:" + canavar.saglik);
         System.out.println("---------");
         canavar.saglik=temp;

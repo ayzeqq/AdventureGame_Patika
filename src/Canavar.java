@@ -4,5 +4,13 @@ public class Canavar extends Canlilar{
         super(ID, hasar, saglik, para, name, etki);
         //TODO Auto-generated constructor stub
     }
+
+    static int hasarÜret(){
+        return 45;
+    }
+
+    static int eşyaDüş() {
+        return 54;
+    }
     
 }
