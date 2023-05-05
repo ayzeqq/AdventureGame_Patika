@@ -1,9 +1,10 @@
 public class Karakter extends Canlilar{
 
-    //Karakter karakter;
+    //Silahlar silah;
+    //Zirhlar zirh;
 
-    Karakter(int ID, int hasar, int saglik, int para) {
-        super(ID, hasar, saglik, para);
+    Karakter(int ID, int hasar, int saglik, int para, String name, int etki) {
+        super(ID, hasar, saglik, para, name, etki);
         //TODO Auto-generated constructor stub
     }
 

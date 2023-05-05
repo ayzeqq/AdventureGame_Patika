@@ -12,23 +12,28 @@ public class Mekan {
         this.eşya=eşya;
     }
     
-    public void canavarSayisi(){
+    public int canavarSayisi(){
         Random rand = new Random();
         int sayi = rand.nextInt(3)+1;
-        System.out.println("canavar sayısı " + sayi);
+        return sayi;
     }
-
-    public void savasGanimet(Karakter karakter){
+    public void savasGanimet(Karakter karakter, int i){
+        System.out.println(i+". düşman");
+        System.out.println("---------");
         System.out.println("Oyuncu sağlığı:" + karakter.saglik + "Canavar sağlığı:" + canavar.saglik);
-        while(canavar.saglik>=0 && karakter.saglik>=0){
-            canavar.saglik-=karakter.hasar;
-            karakter.saglik-=canavar.hasar;
+        int temp=canavar.saglik;
+        while(canavar.saglik>0 && karakter.saglik>0){
+            canavar.saglik-=karakter.etki;
+            karakter.saglik-=canavar.etki;
         }
         System.out.println("Oyuncu sağlığı:" + karakter.saglik + "Canavar sağlığı:" + canavar.saglik);
-        if(karakter.saglik>0){
+        System.out.println("===========");
+        canavar.saglik=temp;
+        /*if(karakter.saglik>0){
             this.eşya=true;
             System.out.println("Eşya kazanıldı.");
-        }
+            
+        }*/
     }
 
     /*public void esyaKazan(){
