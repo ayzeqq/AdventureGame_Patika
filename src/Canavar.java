@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class Canavar extends Canlilar{
 
     Canavar(int ID, int hasar, int saglik, int para, String name, int etki) {
@@ -6,7 +8,9 @@ public class Canavar extends Canlilar{
     }
 
     static int hasarÜret(){
-        return 45;
+        Random rand = new Random();
+        int hsr = rand.nextInt(4)+3;
+        return hsr;
     }
 
     static int eşyaDüş() {

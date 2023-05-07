@@ -12,12 +12,12 @@ public class Mağaza {
     
     Scanner input = new Scanner(System.in);
     
-    public void alisveris(Karakter karakter, int al, Canavar c1, Canavar c2, Canavar c3){
+    public void alisveris(Karakter karakter, int al, Canavar c1, Canavar c2, Canavar c3, Canavar c4){
         if(al==1){
             silahAl(karakter);
         }
         if(al==2){
-            zirhAl(karakter, c1, c2, c3);
+            zirhAl(karakter, c1, c2, c3, c4);
         }
     }
 
@@ -42,7 +42,7 @@ public class Mağaza {
         }
     }
 
-    public void zirhAl(Karakter karakter, Canavar c1, Canavar c2, Canavar c3){
+    public void zirhAl(Karakter karakter, Canavar c1, Canavar c2, Canavar c3, Canavar c4){
         System.out.println("Hangi zırh? Hafif(1)[15 P], Orta(2)[25 P], Ağır(3)[40 P]");
         System.out.println("Cüzdan: " + karakter.para);
         int al = input.nextInt();
@@ -50,21 +50,35 @@ public class Mağaza {
             c1.etki=c1.hasar-1;
             c2.etki=c2.hasar-1;
             c3.etki=c3.hasar-1;
-            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki);
+            c4.etki=c4.hasar-1;
+            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki + ", C4: " + c4.etki);
             karakter.para-=15;
         }
         else if(al==2 && karakter.para>=25){
             c1.etki=c1.hasar-3;
             c2.etki=c2.hasar-3;
             c3.etki=c3.hasar-3;
-            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki);
+            if(c4.hasar-3>=0){
+                c4.etki=c4.hasar-3;
+            }
+            else{
+                c4.etki=0;
+            }
+            //c4.etki=c4.hasar-1;
+            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki + ", C4: " + c4.etki);
             karakter.para-=25;
         }
         else if(al==3 && karakter.para>=40){
             c1.etki=0;
             c2.etki=0;
             c3.etki=c3.hasar-5;
-            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki);
+            if(c4.hasar-5>=0){
+                c4.etki=c4.hasar-5;
+            }
+            else{
+                c4.etki=0;
+            }
+            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki + ", C4: " + c4.etki);
             karakter.para-=40;
         }
         else{

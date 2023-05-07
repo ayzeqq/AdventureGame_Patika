@@ -1,7 +1,12 @@
+import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws Exception {
+        // ---- Terimler ingilizceye çevrilecek...
+        
+        // ++++ Hasar ve etki de randomlanacak!!
+        // ++++ Para-eşya vs düşme ihtimalini düzenle...
         // ++++ Satın alma düzenlemesi yapılacak...
         // ++++ Gereksiz eklenen kodları incele ve çıkar...
         // ++++ Mağaza kısmı eklenecek...
@@ -16,8 +21,9 @@ public class Main {
         Canavar Zombi = new Canavar (1,3,10,4, "Zombi", 3);
         Canavar Vampir = new Canavar (2,4,14,7, "Vampir", 4);
         Canavar Ayı = new Canavar (3,7,20,12, "Ayı", 7);
-        Canavar Yılan = new Canavar (4, 0, 12, 0, "Yılan", 6); //hasar ve etki de randomlanacak!!
-        //System.out.println(Yılan.para + " " + Yılan.hasar);
+        
+        Canavar Yılan = new Canavar (4, Canavar.hasarÜret(), 12, 0, "Yılan", 6); 
+        System.out.println("Yılan hasar:  " + Yılan.hasar);
         
         /*Silahlar Tabanca = new Silahlar (1,2,25);
         Silahlar Kılıç = new Silahlar (2,3,35);
@@ -31,7 +37,7 @@ public class Main {
         Mekan Mağara = new Mekan ("Mağara", Zombi, false);
         Mekan Orman = new Mekan ("Orman", Vampir, false);
         Mekan Nehir = new Mekan ("Nehir", Ayı, false);
-        Mekan Maden = new Mekan (name:"Maden", Yılan, false);
+        Mekan Maden = new Mekan ("Maden", Yılan, false);
         Mekan Savaş = new Mekan ("Savaş", Zombi, false);
 
         Mağaza mağaza = new Mağaza();
@@ -173,19 +179,21 @@ public class Main {
             else if(seçMek==5){
                 System.out.println("Hangisini satın almak istersin? Silah (1) / Zırh (2)");
                 int al = input.nextInt();
-                mağaza.alisveris(Gamer, al, Zombi, Vampir, Ayı);
+                mağaza.alisveris(Gamer, al, Zombi, Vampir, Ayı, Yılan);
                 System.out.println("Kalan para: " + Gamer.para);
             }
-            else if(seçMek==6){ // hasar ve para-eşya vs düşme ihtimalini düzenle...
+            else if(seçMek==6){ 
                 Savaş=Maden;
-                if(Maden.eşya){
+                if(Savaş.eşya){
                     System.out.println("=========");
                     System.out.println("Daha önce bu bölümden eşya kazanıldı.");
                     System.out.println("Diğer bölümleri tamamlayınız!");
                     System.out.println("=========");
                     continue;
                 }
-                int sayi = Savaş.canavarSayisi();
+                Random rand = new Random();
+                int sayi = rand.nextInt(5)+1;
+                //int sayi = Savaş.canavarSayisi();
                 System.out.println(sayi + " adet Yılan çıktı, savaşmak için (1), kaçmak için (2).");
                 int savKaç=input.nextInt();
                 if(savKaç==2) {
@@ -199,16 +207,15 @@ public class Main {
                         break;
                     }
                     if(Gamer.saglik>0) {
-                        Gamer.para+=12;
-                        System.out.println("12 para kazandınız!");
+                        Savaş.yılanEşyaÇarkı(Gamer, Zombi, Vampir, Ayı, Yılan, Savaş);
                         System.out.println("Toplam para: " + Gamer.para);
                         System.out.println("=========");
                     }
                 }
                 if(Gamer.saglik>0){
-                    Nehir.eşya=true;
-                    System.out.println("Eşya kazanıldı!");
-                    System.out.println(" ");
+                    Maden.eşya=true;
+                    //System.out.println("Eşya kazanıldı!");
+                    //System.out.println(" ");
                 }
                 if(isKazandi(Mağara, Orman, Nehir)){
                     System.out.println("Kazandınız!");
