@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) throws Exception {
         // ---- Terimler ingilizceye çevrilecek...
-        
+
         // ++++ Hasar ve etki de randomlanacak!!
         // ++++ Para-eşya vs düşme ihtimalini düzenle...
         // ++++ Satın alma düzenlemesi yapılacak...
@@ -23,7 +23,8 @@ public class Main {
         Canavar Ayı = new Canavar (3,7,20,12, "Ayı", 7);
         
         Canavar Yılan = new Canavar (4, Canavar.hasarÜret(), 12, 0, "Yılan", 6); 
-        System.out.println("Yılan hasar:  " + Yılan.hasar);
+        
+        
         
         /*Silahlar Tabanca = new Silahlar (1,2,25);
         Silahlar Kılıç = new Silahlar (2,3,35);
@@ -42,8 +43,9 @@ public class Main {
 
         Mağaza mağaza = new Mağaza();
         
-        System.out.println("Karakter seçiniz: Samuray (1), Okçu (2), Şovalye (3)");
-
+        System.out.println("Karakter seçiniz:");
+        System.out.println("-----------------");
+        System.out.println("Samuray (1), Okçu (2), Şovalye (3)");
         Scanner input = new Scanner(System.in);
         int seçKar = input.nextInt();
         if(seçKar==1) Gamer=Samuray;
@@ -51,44 +53,45 @@ public class Main {
         if(seçKar==3) Gamer=Şovalye;
 
         while(Gamer.saglik>0){
-            System.out.println("Gidilecek yer: Mağara 1, Orman 2, Nehir 3, Güvenli Ev 4, Mağaza 5");
+            System.out.println("Gitmek istediğiniz yeri seçiniz:");
+            System.out.println("--------------------------------");
+            System.out.println("Mağara (1), Orman (2), Nehir (3), Maden (4), Mağaza (5), Güvenli Ev (6)");
             int seçMek = input.nextInt();
             if(seçMek==1) {
                 Savaş=Mağara;
                 if(Mağara.eşya){
                     System.out.println("=========");
                     System.out.println("Daha önce bu bölümden eşya kazanıldı.");
-                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("Diğer bölümleri tamamlayınız.");
                     System.out.println("=========");
                     continue;
                 }
                 int sayi = Savaş.canavarSayisi();
-                System.out.println(sayi + " adet Zombi çıktı, savaşmak için (1), kaçmak için (2).");
+                System.out.println(sayi + " adet Zombi çıktı, savaşmak için (1), kaçmak için (2)");
                 int savKaç=input.nextInt();
                 if(savKaç==2) {
                     continue;
                 }
                 for(int i=1;i<=sayi;i++){
                     if(Gamer.saglik>0){
-                        Savaş.savasGanimet(Gamer, i);
+                        Savaş.savasGanimet(Gamer, i, Zombi);
                     }
                     else{
                         break;
                     }
                     if(Gamer.saglik>0) {
                         Gamer.para+=4;
-                        System.out.println("4 para kazandınız!");
+                        System.out.println("4 para kazandınız.");
                         System.out.println("Toplam para: " + Gamer.para);
                         System.out.println("=========");
                     }
                 }
                 if(Gamer.saglik>0){
                     Mağara.eşya=true;
-                    System.out.println("Eşya kazanıldı!");
+                    System.out.println("Eşya kazanıldı.");
                 }
                 
-                if(isKazandi(Mağara, Orman, Nehir)){
-                    System.out.println("Kazandınız!");
+                if(isKazandi(Mağara, Orman, Nehir, Maden)){
                     break;
                 }
             }
@@ -97,36 +100,35 @@ public class Main {
                 if(Orman.eşya){
                     System.out.println("=========");
                     System.out.println("Daha önce bu bölümden eşya kazanıldı.");
-                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("Diğer bölümleri tamamlayınız.");
                     System.out.println("=========");
                     continue;
                 }
                 int sayi = Savaş.canavarSayisi();
-                System.out.println(sayi + " adet Vampir çıktı, savaşmak için (1), kaçmak için (2).");
+                System.out.println(sayi + " adet Vampir çıktı, savaşmak için (1), kaçmak için (2)");
                 int savKaç=input.nextInt();
                 if(savKaç==2) {
                     continue;
                 }
                 for(int i=1;i<=sayi;i++){
                     if(Gamer.saglik>0){
-                        Savaş.savasGanimet(Gamer, i);
+                        Savaş.savasGanimet(Gamer, i, Vampir);
                     }
                     else{
                         break;
                     }
                     if(Gamer.saglik>0) {
                         Gamer.para+=7;
-                        System.out.println("7 para kazandınız!");
+                        System.out.println("7 para kazandınız.");
                         System.out.println("Toplam para: " + Gamer.para);
                         System.out.println("=========");
                     }
                 }
                 if(Gamer.saglik>0){
                     Orman.eşya=true;
-                    System.out.println("Eşya kazanıldı!");
+                    System.out.println("Eşya kazanıldı.");
                 }
-                if(isKazandi(Mağara, Orman, Nehir)){
-                    System.out.println("Kazandınız!");
+                if(isKazandi(Mağara, Orman, Nehir, Maden)){
                     break;
                 }
             }
@@ -135,73 +137,59 @@ public class Main {
                 if(Nehir.eşya){
                     System.out.println("=========");
                     System.out.println("Daha önce bu bölümden eşya kazanıldı.");
-                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("Diğer bölümleri tamamlayınız.");
                     System.out.println("=========");
                     continue;
                 }
                 int sayi = Savaş.canavarSayisi();
-                System.out.println(sayi + " adet Ayı çıktı, savaşmak için (1), kaçmak için (2).");
+                System.out.println(sayi + " adet Ayı çıktı, savaşmak için (1), kaçmak için (2)");
                 int savKaç=input.nextInt();
                 if(savKaç==2) {
                     continue;
                 }
                 for(int i=1;i<=sayi;i++){
                     if(Gamer.saglik>0){
-                        Savaş.savasGanimet(Gamer, i);
+                        Savaş.savasGanimet(Gamer, i, Ayı);
                     }
                     else{
                         break;
                     }
                     if(Gamer.saglik>0) {
                         Gamer.para+=12;
-                        System.out.println("12 para kazandınız!");
+                        System.out.println("12 para kazandınız.");
                         System.out.println("Toplam para: " + Gamer.para);
                         System.out.println("=========");
                     }
                 }
                 if(Gamer.saglik>0){
                     Nehir.eşya=true;
-                    System.out.println("Eşya kazanıldı!");
+                    System.out.println("Eşya kazanıldı.");
                     System.out.println(" ");
                 }
-                if(isKazandi(Mağara, Orman, Nehir)){
-                    System.out.println("Kazandınız!");
-                    System.out.println("BİLGİLER:");
-                    System.out.println("Oyuncu sağlık durumu: " + Gamer.saglik);
-                    System.out.println("Oyuncu para durumu: " + Gamer.para);
+                if(isKazandi(Mağara, Orman, Nehir, Maden)){
                     break;
                 }
             }
-            else if(seçMek==4){
-                Gamer.saglikTamamla();
-                System.out.println("Sağlık yenilendi!");
-            }
-            else if(seçMek==5){
-                System.out.println("Hangisini satın almak istersin? Silah (1) / Zırh (2)");
-                int al = input.nextInt();
-                mağaza.alisveris(Gamer, al, Zombi, Vampir, Ayı, Yılan);
-                System.out.println("Kalan para: " + Gamer.para);
-            }
-            else if(seçMek==6){ 
+            else if(seçMek==4){ 
                 Savaş=Maden;
                 if(Savaş.eşya){
                     System.out.println("=========");
                     System.out.println("Daha önce bu bölümden eşya kazanıldı.");
-                    System.out.println("Diğer bölümleri tamamlayınız!");
+                    System.out.println("Diğer bölümleri tamamlayınız.");
                     System.out.println("=========");
                     continue;
                 }
                 Random rand = new Random();
                 int sayi = rand.nextInt(5)+1;
                 //int sayi = Savaş.canavarSayisi();
-                System.out.println(sayi + " adet Yılan çıktı, savaşmak için (1), kaçmak için (2).");
+                System.out.println(sayi + " adet Yılan çıktı, savaşmak için (1), kaçmak için (2)");
                 int savKaç=input.nextInt();
                 if(savKaç==2) {
                     continue;
                 }
                 for(int i=1;i<=sayi;i++){
                     if(Gamer.saglik>0){
-                        Savaş.savasGanimet(Gamer, i);
+                        Savaş.savasGanimet(Gamer, i, Yılan);
                     }
                     else{
                         break;
@@ -217,33 +205,51 @@ public class Main {
                     //System.out.println("Eşya kazanıldı!");
                     //System.out.println(" ");
                 }
-                if(isKazandi(Mağara, Orman, Nehir)){
-                    System.out.println("Kazandınız!");
-                    System.out.println("BİLGİLER:");
-                    System.out.println("Oyuncu sağlık durumu: " + Gamer.saglik);
-                    System.out.println("Oyuncu para durumu: " + Gamer.para);
+                if(isKazandi(Mağara, Orman, Nehir, Maden)){
                     break;
                 }
             }
-            else {
-                System.out.println("Geçerli bir seçenek giriniz!");
+            else if(seçMek==5){
+                System.out.println("Hangisini satın almak istersin? Silah (1) / Zırh (2)");
+                int al = input.nextInt();
+                mağaza.alisveris(Gamer, al, Zombi, Vampir, Ayı, Yılan);
+                System.out.println("Kalan para: " + Gamer.para);
             }
-            
+            else if(seçMek==6){
+                Gamer.saglikTamamla();
+                System.out.println("Sağlık yenilendi. Son sağlık durumu: " + Gamer.saglik);
+            }
+            else {
+                System.out.println("Geçerli bir seçenek giriniz:");
+            }
         }
+
         if(Gamer.saglik<=0) {
             System.out.println("============");
-            System.out.println("Kaybettiniz!");
+            System.out.println(":( :( OYUNU KAYBETTİNİZ. :( :(");
             System.out.println("============");
-            System.out.println("BİLGİLER:");
+            System.out.println("SON DURUM:");
+            System.out.println("Oyuncu sağlık durumu: " + Gamer.saglik);
+            System.out.println("Oyuncu para durumu: " + Gamer.para);
+        }
+        else {
+            System.out.println("============");
+            System.out.println("---### OYUNU KAZANDINIZ. ###---");
+            System.out.println("============");
+            System.out.println("SON DURUM:");
             System.out.println("Oyuncu sağlık durumu: " + Gamer.saglik);
             System.out.println("Oyuncu para durumu: " + Gamer.para);
         }
     }
 
-    static boolean isKazandi(Mekan Mağara, Mekan Orman, Mekan Nehir) {
-        if(Mağara.eşya==true && Orman.eşya==true && Nehir.eşya==true){
+    static boolean isKazandi(Mekan Mağara, Mekan Orman, Mekan Nehir, Mekan Maden) {
+        if(Mağara.eşya==true && Orman.eşya==true && Nehir.eşya==true && Maden.eşya==true){
             return true;
         }
         return false;
+    }
+
+    public void sonDurum() {
+
     }
 }

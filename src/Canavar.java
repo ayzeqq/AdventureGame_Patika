@@ -11,10 +11,5 @@ public class Canavar extends Canlilar{
         Random rand = new Random();
         int hsr = rand.nextInt(4)+3;
         return hsr;
-    }
-
-    static int eşyaDüş() {
-        return 54;
-    }
-    
+    }    
 }

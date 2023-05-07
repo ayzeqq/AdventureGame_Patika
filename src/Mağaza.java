@@ -28,14 +28,17 @@ public class Mağaza {
         if(al==1 && karakter.para>=25){
             karakter.etki=karakter.hasar+2;
             karakter.para-=25;
+            System.out.println("Tabanca satın alındı. Vuruş gücü (+2): " + karakter.etki);
         }
         else if(al==2 && karakter.para>=35){
             karakter.etki=karakter.hasar+3;
             karakter.para-=35;
+            System.out.println("Kılıç satın alındı. Vuruş gücü (+3): " + karakter.etki);
         }
         else if(al==3 && karakter.para>=45){
             karakter.etki=karakter.hasar+7;
             karakter.para-=45;
+            System.out.println("Tüfek satın alındı. Vuruş gücü (+7): " + karakter.etki);
         }
         else{
             System.out.println("Silah satın alınmadı!");
@@ -51,7 +54,7 @@ public class Mağaza {
             c2.etki=c2.hasar-1;
             c3.etki=c3.hasar-1;
             c4.etki=c4.hasar-1;
-            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki + ", C4: " + c4.etki);
+            System.out.println("Hafif zırh satın alındı. Engelleme gücü (+1)");
             karakter.para-=15;
         }
         else if(al==2 && karakter.para>=25){
@@ -64,8 +67,7 @@ public class Mağaza {
             else{
                 c4.etki=0;
             }
-            //c4.etki=c4.hasar-1;
-            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki + ", C4: " + c4.etki);
+            System.out.println("Orta zırh satın alındı. Engelleme gücü (+3)");
             karakter.para-=25;
         }
         else if(al==3 && karakter.para>=40){
@@ -78,7 +80,7 @@ public class Mağaza {
             else{
                 c4.etki=0;
             }
-            System.out.println("C1: " + c1.etki + ", C2: " + c2.etki + ", C3: " + c3.etki + ", C4: " + c4.etki);
+            System.out.println("Ağır zırh satın alındı. Engelleme gücü (+5)");
             karakter.para-=40;
         }
         else{
